@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<System>
+  <Seting>
+    <Prec>2</Prec>
+    <Unit>g</Unit>
+    <SpeedH>10</SpeedH>
+    <SpeedL>200</SpeedL>
+  </Seting>
+</System>
