@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from threading import Thread
 
-ser = serial.Serial("COM5", 115200)     #初始化串口
+ser = serial.Serial("COM3", 115200)     #初始化串口
 
 # # 定义协议解析函数
 # def parse_data(data):
@@ -15,7 +15,7 @@ ser = serial.Serial("COM5", 115200)     #初始化串口
 #     if len(data) < 6:
 #         print("数据长度不足！")
 #         return None
-#     # 判断起始标识是否正确
+
 #     if data[0] != 0xA5 or data[1] != 0x5A:
 #         print("起始标识错误！")
 #         return None
@@ -87,13 +87,8 @@ def getData():
     ser.close()
 
 def plotGraph():
-    global result
-    while True:
-        if result != 0:
-            matrix = np.reshape(result, (4,4))
-            sns.heatmap(matrix,vmin = 1200,vmax=4500,cmap="mako")
-            plt.pause(0.0001)
-            plt.clf()
+    #global result
+    return
 
 def main():
     global result
@@ -104,7 +99,12 @@ def main():
     # 启动线程运行
     t1.start()
     t2.start()
-
+    while True:
+        if result != 0:
+            matrix = np.reshape(result, (4,4))
+            sns.heatmap(matrix,vmin = 1200,vmax=1800,cmap="mako")
+            plt.pause(0.01)
+            plt.clf()
     # 等待所有线程执行完毕
     t1.join()  # join() 等待线程终止，要不然一直挂起
     t2.join()
