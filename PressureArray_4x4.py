@@ -9,30 +9,6 @@ from threading import Thread
 
 ser = serial.Serial("COM3", 115200)     #初始化串口
 
-# # 定义协议解析函数
-# def parse_data(data):
-#     # 判断数据长度是否正确
-#     if len(data) < 6:
-#         print("数据长度不足！")
-#         return None
-
-#     if data[0] != 0xA5 or data[1] != 0x5A:
-#         print("起始标识错误！")
-#         return None
-#     # 判断校验和是否正确
-#     data_len = int.from_bytes(data[2:4], byteorder='big')
-#     check_sum = sum(data[:4+data_len]) & 0xff
-#     if check_sum != data[4+data_len]:
-#         print("校验和错误！")
-#         return None
-#     # 解析命令
-#     command = data[4]
-#     # 解析数据长度
-#     length = int.from_bytes(data[5:7], byteorder='big')
-#     # 解析数据
-#     value = int.from_bytes(data[7:7+length], byteorder='big')
-#     # 返回解析结果
-#     return command, value
 def parse_data (data):
 
     value=[0 for c in range(0,8)]
@@ -51,7 +27,6 @@ def getData():
         
         #print(str(binascii.b2a_hex(raw_data)))
         if len(raw_data) > 0:
-            # 串口数据中有多个协议数据包可能需要解析
             for i in range(len(raw_data)):
                 
                 if raw_data[i] == 0x24 and i+5 < len(raw_data):
